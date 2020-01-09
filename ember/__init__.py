@@ -221,3 +221,25 @@ def predict_sample(lgbm_model, file_data, feature_version=2):
     extractor = PEFeatureExtractor(feature_version)
     features = np.array(extractor.feature_vector(file_data), dtype=np.float32)
     return lgbm_model.predict([features])[0]
+
+
+def extract_sample_raw_features(file_data, feature_version=2):
+    """
+    Extract raw features from a PE file
+    """
+    extractor = PEFeatureExtractor(feature_version)
+    return extractor.raw_features(file_data)
+
+def extract_sample_feature_vector(file_data, feature_version=2):
+    """
+    Extract feature vector from a PE file
+    """
+    extractor = PEFeatureExtractor(feature_version)
+    return extractor.feature_vector(file_data)
+
+def extract_vector_from_raw_feature(raw_feature, feature_version=2):
+    """
+    Extract feature vector from a raw feature (dict)
+    """
+    extractor = PEFeatureExtractor(feature_version)
+    return extractor.process_raw_features(raw_feature)
